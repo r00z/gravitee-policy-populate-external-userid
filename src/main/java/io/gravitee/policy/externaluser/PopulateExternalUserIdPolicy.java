@@ -37,7 +37,6 @@ import static io.gravitee.gateway.api.ExecutionContext.*;
 @SuppressWarnings("unused")
 public class PopulateExternalUserIdPolicy {
     private static final Logger LOGGER = LoggerFactory.getLogger(PopulateExternalUserIdPolicy.class);
-    static final String BEARER_AUTHORIZATION_TYPE = "Bearer";
     /**
      * The associated configuration to this PopulateExternalUserId Policy
      */
