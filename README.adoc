@@ -1,0 +1,12 @@
+= PopulateExternalUserId Gravitee Policy
+
+ifdef::env-github[]
+image:https://badges.gitter.im/Join Chat.svg["Gitter", link="https://gitter.im/gravitee-io/gravitee-io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
+endif::[]
+
+Policy sets then _external-user-id_ attribute to the ExecutionContext.
+
+Logic:
+
+- If application belongs to API owner - then _external-user-id_ will be taken from he _Client_id_ of the application.
+- For all other cases it will be email address of the application owner user
