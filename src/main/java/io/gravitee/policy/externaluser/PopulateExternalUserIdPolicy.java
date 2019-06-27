@@ -88,12 +88,12 @@ public class PopulateExternalUserIdPolicy {
             Api api = apiOpt.get();
 
             String currentUser = subscription.getSubscribedBy();
-            LOGGER.info("Subscription Current user: " + currentUser);
+            LOGGER.debug("Subscription Current user: " + currentUser);
 
             boolean isOwner = isApiOwner(membershipRepository, api, currentUser);
             if (isOwner) {
                 // API owner can assign externalUserIds himself instead of asking them to register in the portal
-                LOGGER.info("Current user is API owner - return configured ClientId from the application: " + subscription.getClientId());
+                LOGGER.debug("Current user is API owner - return configured ClientId from the application: " + subscription.getClientId());
                 return subscription.getClientId();
             }
 
@@ -101,10 +101,12 @@ public class PopulateExternalUserIdPolicy {
             if (!userOpt.isPresent()) {
                 return null;
             }
-            LOGGER.info("Return Current User Email: " + userOpt.get().getEmail());
+            LOGGER.debug("Return Current User Email: " + userOpt.get().getEmail());
             return userOpt.get().getEmail();
         } catch (TechnicalException te) {
             LOGGER.error("An unexpected error occurs while populating userId.", te);
+        } catch (IllegalStateException ise) {
+            LOGGER.error("An unexpected error occurs while populating userId. Most likely SubscriptionRepositoryWrapper is used where findById is not implemented ", ise);
         }
         return null;
     }
