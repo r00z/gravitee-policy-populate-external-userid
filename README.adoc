@@ -10,3 +10,15 @@ Logic:
 
 - If application belongs to API owner - then _external-user-id_ will be taken from he _Client_id_ of the application.
 - For all other cases it will be email address of the application owner user
+
+If Subscription cache service is enabled in the Gateway installation - the policy will not work. Use pathched version from _/build_ folder: _gravitee-gateway-services-subscriptions-cache-1.26.2-SNAPSHOT.zip_
+
+The fix for Subscription cache service is submitted to gravitee main repo and hopefully it will be approved and the patched version would not be needed.
+
+Another option is to disable Subscription cache service in the _gravitee.yml_ config file:
+
+----
+services:
+  subscriptions:
+    enabled: false
+----
